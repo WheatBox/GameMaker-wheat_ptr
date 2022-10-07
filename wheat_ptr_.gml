@@ -110,9 +110,17 @@ function wheat_ptr(_EWheatPtrType_Or_wheat_ptr = EWheatPtrType.Global, _varMaste
 	/// @desc 互换两个 wheat_ptr 所指向的目标（不会对被指向的变量的值产生影响），成功返回 true，失败返回 false
 	static swap = function(_wheat_ptr) {
 		if(is_struct(_wheat_ptr)) {
+			var _temp = [ type, varMaster, varName ];
+			
 			type = _wheat_ptr.type;
 			varMaster = _wheat_ptr.varMaster;
 			varName = _wheat_ptr.varName;
+			
+			_wheat_ptr.type = _temp[0];
+			_wheat_ptr.varMaster = _temp[1];
+			_wheat_ptr.varName = _temp[2];
+			
+			return true;
 		}
 		
 		return false;
